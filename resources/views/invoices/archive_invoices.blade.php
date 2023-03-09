@@ -110,7 +110,9 @@
                             <thead>
                             <tr>
                                 <th class="border-bottom-0"> # </th>
+                                @can('العمليات')
                                 <th class="border-bottom-0"> العمليات </th>
+                                @endcan
                                 <th class="border-bottom-0"> رقم الفاتورة </th>
                                 <th class="border-bottom-0"> ناريخ الفاتورة </th>
                                 <th class="border-bottom-0"> تاريخ الاستحقاق </th>
@@ -135,6 +137,7 @@
                                 @endphp
                                     <tr>
                                         <td>{{ $i }}</td>
+                                    @can('العمليات')
                                         <td>
                                             <div class="dropdown">
                                                 <button aria-expanded="false" aria-haspopup="true"
@@ -142,18 +145,23 @@
                                                         type="button">العمليات</button>
                                                 <div class="dropdown-menu tx-14">
 
+                                                @can('ارشفة الفاتورة')
+                                                    <a class="dropdown-item" href="#" data-invoice_id="{{ $item -> id }}"
+                                                       data-toggle="modal" data-target="#transfer_invoice_form">
+                                                        <i class="text-warning fas fa-exchange-alt ml-2"></i>نقل الي الفواتير</a>
+                                                @endcan
+
+                                                @can('حذف الفاتورة')
                                                     <a class="dropdown-item" href="#" data-id = "{{ $item -> id }}"
                                                        data-toggle="modal" data-invoice_number="{{ $item -> invoice_number }}"
                                                        data-target="#invoice_del">
                                                         <i class="text-danger fas fa-trash-alt ml-2"></i> حذف الفاتورة </a>
-
-                                                    <a class="dropdown-item" href="#" data-invoice_id="{{ $item -> id }}"
-                                                       data-toggle="modal" data-target="#transfer_invoice_form">
-                                                        <i class="text-warning fas fa-exchange-alt ml-2"></i>نقل الي الفواتير</a>
+                                                @endcan
 
                                                 </div>
                                             </div>
                                         </td>
+                                    @endcan
                                         <td>{{ $item -> invoice_number }}</td>
                                         <td>{{ $item -> invoice_date }}</td>
                                         <td>{{ $item -> due_date }}</td>

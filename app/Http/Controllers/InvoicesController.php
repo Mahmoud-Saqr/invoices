@@ -25,6 +25,16 @@ use Illuminate\Support\Facades\Storage;
 
 class InvoicesController extends Controller
 {
+
+    function __construct()
+    {
+        $this -> middleware('permission:show permission',
+        ['only' => ['index','store','show','paidInvoices','unPaidInvoices','partOfPaidInvoices','print']]);
+        $this -> middleware('permission:create permission', ['only' => ['create','store']]);
+        $this -> middleware('permission:edit permission', ['only' => ['edit','update','statusUpdate']]);
+        $this -> middleware('permission:remove permission', ['only' => ['destroy']]);
+    }
+
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\
         * Display a listing of the resource.
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

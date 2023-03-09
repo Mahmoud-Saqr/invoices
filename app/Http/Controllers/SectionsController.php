@@ -8,6 +8,16 @@ use Illuminate\support\Facades\Auth;
 
 class SectionsController extends Controller
 {
+
+    function __construct()
+    {
+        $this -> middleware('permission:show permission', ['only' => ['index','store','show']]);
+        $this -> middleware('permission:create permission', ['only' => ['create','store']]);
+        $this -> middleware('permission:edit permission', ['only' => ['edit','update']]);
+        $this -> middleware('permission:remove permission', ['only' => ['destroy']]);
+    }
+
+
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\
         ! Display a listing of the resource.
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

@@ -110,21 +110,12 @@
         {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
 
         {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
-        {{-- BUTTON ADD SECTION --}}
-        {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
-
-
-
-        {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
-        {{-- END BUTTON ADD SECTION --}}
-        {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
-
-        {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
         {{-- TABLE SECTION --}}
         {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
 
         <div class="col-xl-12">
             <div class="card">
+            @can('create section')
                 <div class="card-header">
                     <div class="d-flex">
                         <a data-effect="effect-scale" data-toggle="modal" href="#form-add"
@@ -132,13 +123,16 @@
                             <i class="fas fa-plus ml-2"></i> اضافة قسم </a>
                     </div>
                 </div>
+            @endcan
                 <div class="card-body">
                     <div class="table-responsive col-12 m-auto">
                         <table class="table table-invoice table-light table-striped table-hover" id="example-1" data-page-length="50">
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0"> # </th>
+                                    @can('options')
                                     <th class="border-bottom-0"> العمليات </th>
+                                    @endcan
                                     <th class="border-bottom-0"> اسم القسم </th>
                                     <th class="border-bottom-0"> قام بالاضافة </th>
                                     <th class="border-bottom-0"> تاريخ الاضافة </th>
@@ -155,13 +149,14 @@
                                 @endphp
                                     <tr>
                                         <td>{{ $i }}</td>
+                                    @can('options')
                                         <td>
                                             <div class="dropdown">
                                                 <button aria-expanded="false" aria-haspopup="true"
                                                         class="btn ripple btn-secondary btn-sm" data-toggle="dropdown"
                                                         type="button">العمليات</button>
                                                 <div class="dropdown-menu tx-14">
-
+                                                @can('edit section')
                                                     <a class="dropdown-item" data-effect="effect-scale"
                                                        data-id="{{ $item -> id }}"
                                                        data-section_name="{{ $item -> section_name }}"
@@ -169,15 +164,21 @@
                                                        href="#form_edit" title="تعديل">
                                                         <i class="typcn typcn-edit text-secondary ml-2"></i> تعديل
                                                     </a>
+                                                @endcan
+
+                                                @can('remove section')
                                                     <a class="dropdown-item" data-effect="effect-scale"
                                                        data-id="{{ $item -> id }}"
                                                        data-section_name="{{ $item -> section_name }}" data-toggle="modal"
                                                        href="#form_del" title="حذف">
                                                         <i class="far fa-file-alt text-danger ml-2"></i> حذف
                                                     </a>
+                                                @endcan
+
                                                 </div>
                                             </div>
                                         </td>
+                                    @endcan
                                         <td>{{ $item -> section_name }}</td>
                                         <td>{{ $item -> created_by }}</td>
                                         <td>{{ $item -> created_at }}</td>

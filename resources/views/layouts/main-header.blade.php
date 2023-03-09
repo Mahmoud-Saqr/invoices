@@ -3,7 +3,7 @@
 				<div class="container-fluid">
 					<div class="main-header-left ">
 						<div class="responsive-logo">
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}" class="logo-1" alt="logo"></a>
+{{--							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}" class="logo-1" alt="logo"></a>--}}
 							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo-white.png')}}" class="dark-logo-1" alt="logo"></a>
 							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="logo-2" alt="logo"></a>
 							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="dark-logo-2" alt="logo"></a>
@@ -262,10 +262,23 @@
 {{--											</div>--}}
 {{--										</div>--}}
 {{--									</div>--}}
+
+{{--                                    @can('الحساب الشخصي')--}}
 									<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i> الحساب الشخصي </a>
+{{--                                    @endcan--}}
+
+{{--                                    @can('تعديل معلوماتك')--}}
 									<a class="dropdown-item" href=""><i class="bx bx-cog"></i> تعديل معلوماتك </a>
-									<a class="dropdown-item" href=""><i class="bx bx-envelope"></i> الرسائل </a>
-									<a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> الاعدادات </a>
+{{--                                    @endcan--}}
+
+{{--                                    @can('الرسائل')--}}
+                                    <a class="dropdown-item" href=""><i class="bx bx-envelope"></i> الرسائل </a>
+{{--                                    @endcan--}}
+
+{{--                                    @can('الاعدادات')--}}
+                                    <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> الاعدادات </a>
+{{--                                    @endcan--}}
+
                                     <a class="dropdown-item"
 										href="{{ route('logout') }}"
 										onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

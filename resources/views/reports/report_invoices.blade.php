@@ -17,9 +17,29 @@
     <!--Internal   Notify -->
     <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 
-@section('title')
-    Invoices - Invoices Reports
-@stop
+    <style>
+        .microphone {
+            cursor: pointer;
+        }
+        .microphone .recourding-icon {
+            display: none;
+            width: 10px;
+            height: 10px;
+            background-color: brown;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite linear;
+        }
+        .microphone.recording .recording-icon {
+            display: inline;
+        }
+        .microphone.recording .la-microphone {
+            display: none;
+        }
+    </style>
+
+    @section('title')
+        Invoices - Invoices Reports
+    @stop
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -76,8 +96,8 @@
                         <div class="d-flex justify-content-start flex-wrap gap-4">
                             <div class="col-lg-3 mt-3" id="invoice_number">
                                 <p class="mg-b-10"> البحث برقم الفاتورة </p>
-                                <input type="text" class="form-control"
-                                       id="invoice_number_input" name="invoice_number" value="{{  $invoiceNumber?? ''  }}">
+                                <input type="search" class="form-control" id="invoice_number"
+                                       name="invoice_number" value="{{  $invoiceNumber ?? ''  }}">
                             </div>
 
                             <div class="col-lg-3 mt-3" id="status">
@@ -130,7 +150,7 @@
                 <div class="card-body">
                     <div class="table-responsive col-12 m-auto">
                         @if (isset($details))
-                                <table class="table table-invoice table-light table-striped table-hover" id="example-1" data-page-length="50">
+                            <table class="table table-invoice table-light table-striped table-hover" id="example-1" data-page-length="50">
                                 <thead>
                                 <tr>
                                     <th class="border-bottom-0"> # </th>
@@ -150,10 +170,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $i = 0;
-                                    @endphp
-                                    @foreach( $details as $item )
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach( $details as $item )
                                     @php
                                         $i++;
                                     @endphp
@@ -216,39 +236,18 @@
                                 @endforeach
                                 </tbody>
                             </table>
-
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- row closed -->
+        <!-- row closed -->
     </div>
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
 @endsection
 @section('js')
-    <!-- Internal Data tables -->
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
-    <!--Internal  Datatable js -->
-    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
 
     <!--Internal  Datepicker js -->
     <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
@@ -268,9 +267,30 @@
     <script src="{{ URL::asset('assets/plugins/pickerjs/picker.min.js') }}"></script>
     <!-- Internal form-elements js -->
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
+
+    <!-- Internal Data tables -->
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+    <!--Internal  Datatable js -->
+    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
     <!--Internal  Notify js -->
     <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
     <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
+
 
     <script>
         var date = $('.fc-datepicker').datepicker({

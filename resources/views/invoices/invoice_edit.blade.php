@@ -188,7 +188,7 @@
                             <div class="col">
                                 <label for="inputName" class="control-label"> نسبة ضريبة القيمة المضافة </label>
                                 <select name="rateVAT" id="rateVAT" class="form-control select2-no-search" onchange="myFunction()" required>
-                                    <option value="{{ $invoices -> rate_vat }}" selected disabled> {{ $invoices -> rate_vat }} </option>
+                                    <option value="{{ $invoices -> rate_vat }}"> {{ $invoices -> rate_vat }} </option>
                                     <option value=" 5%">5%</option>
                                     <option value="10%">10%</option>
                                 </select>
@@ -307,6 +307,7 @@
                 }
             });
         });
+
 
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\
         {{-- END SCRIPT --}}

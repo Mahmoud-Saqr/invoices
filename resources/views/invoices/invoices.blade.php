@@ -119,25 +119,26 @@
 
                 <div class="card-header">
                     <div class="d-flex">
-
+                        @can('create invoices')
                         <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
                                 class="fas fa-plus ml-2"></i> اضافة فاتورة </a>
-
+                        @endcan
 {{--                        <a class="modal-effect btn btn-sm btn-primary mr-3" href="{{ url('export_invoices') }}"--}}
 {{--                           style="color:white"><i class="fas fa-file-download ml-2"></i> تصدير اكسيل </a>--}}
 
 {{--                        <a class="modal-effect btn btn-sm btn-primary mr-3" href="{{ url('import_invoices') }}"--}}
 {{--                           style="color:white"><i class="fas fa-file-download ml-2"></i>&nbsp;ارفاق اكسيل</a>--}}
                     </div>
-                </div>
 
-                <div class="card-body">
-                    <div class="table-responsive col-12 m-auto">
-                        <table class="table table-invoice table-light table-striped table-hover" id="example-1" data-page-length="50">
-                            <thead>
+                    <div class="card-body">
+                        <div class="table-responsive col-12 m-auto py-5">
+                            <table class="table table-invoice table-light table-striped table-hover" id="example-1" data-page-length="50">
+                                <thead>
                                 <tr>
                                     <th class="border-bottom-0"> # </th>
+                                    @can('options')
                                     <th class="border-bottom-0"> العمليات </th>
+                                    @endcan
                                     <th class="border-bottom-0"> رقم الفاتورة </th>
                                     <th class="border-bottom-0"> ناريخ الفاتورة </th>
                                     <th class="border-bottom-0"> تاريخ الاستحقاق </th>
@@ -152,7 +153,7 @@
                                     <th class="border-bottom-0"> ملاحظات </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                                <tbody>
                                 @php
                                     $i = 0;
                                 @endphp
@@ -162,41 +163,54 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $i }}</td>
+                                @can('options')
                                     <td>
                                         <div class="dropdown dropleft">
                                             <button aria-expanded="false" aria-haspopup="true"
                                                     class="btn ripple btn-secondary btn-sm" data-toggle="dropdown"
                                                     type="button">العمليات</button>
                                             <div class="dropdown-menu tx-14">
-
+                                                @can('edit invoices')
                                                 <a class="dropdown-item"
                                                    href=" {{ url('invoice_edit') }}/{{ $item -> id }}">
                                                     <i class="typcn typcn-edit text-secondary ml-2"></i> تعديل الفاتورة </a>
+                                                @endcan
 
+                                                @can('update status')
                                                 <a class="dropdown-item"
                                                    href="{{ URL::route('status_edit', [$item -> id] ), 'test' }}">
                                                     <i class="typcn typcn-edit text-secondary ml-2"></i> تعديل حالة الدفع </a>
+                                                @endcan
 
+                                                @can('details invoices')
                                                 <a class="dropdown-item"
                                                    href="{{ url('invoices_details') }}/{{ $item -> id }}">
                                                     <i class="far fa-file-alt text-secondary ml-2"></i> تفاصيل الفاتورة </a>
+                                                @endcan
 
+                                                @can('print invoice')
                                                 <a class="dropdown-item" href="{{ url('print_invoice') }}/{{ $item -> id }}"><i
                                                         class="icon ion-ios-print text-secondary ml-2"></i>طباعة
                                                     الفاتورة
                                                 </a>
+                                                @endcan
 
+                                                @can('archived invoice')
                                                 <a class="dropdown-item" href="#" data-invoice_id="{{ $item -> id }}"
                                                    data-toggle="modal" data-target="#invoice_archive_form">
                                                     <i class="typcn typcn-archive text-secondary ml-2"></i>نقل الي الارشيف</a>
+                                                @endcan
 
+                                                @can('remove invoices')
                                                 <a class="dropdown-item" href="#" data-id = "{{ $item -> id }}"
                                                    data-toggle="modal" data-invoice_number="{{ $item -> invoice_number }}" data-target="#invoice_del">
                                                     <i class="far fa-file-alt text-danger ml-2"></i> حذف الفاتورة </a>
+                                                @endcan
 
                                             </div>
                                         </div>
                                     </td>
+                                @endcan
                                     <td>{{ $item -> invoice_number }}</td>
                                     <td>{{ $item -> invoice_date }}</td>
                                     <td>{{ $item -> due_date }}</td>
@@ -218,8 +232,10 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -333,6 +349,8 @@
     <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 
     <script>
+
+
 
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\
         {{-- SCRIPT DELETE INVOISES --}}

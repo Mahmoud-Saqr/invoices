@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CustomersReportController extends Controller
 {
+
+    function __construct()
+    {
+        $this -> middleware('permission:show permission', ['only' => ['index','reportInvoice']]);
+    }
+
     public function index()
     {
         $t_sections = sections::all();

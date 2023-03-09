@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\invoices;
+use App\Models\invoces_report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceReportController extends Controller
 {
+
+    function __construct()
+    {
+        $this -> middleware('permission:show permission', ['only' => ['index','reportInvoice']]);
+    }
+
     public function index()
     {
         return view('reports.report_invoices');
@@ -14,7 +22,7 @@ class InvoiceReportController extends Controller
 
     public function reportInvoice(Request $request)
     {
-        $status = $request -> type_invoice;
+        $status = $request -> status;
         $dateFrom = $request -> dateFrom;
         $dateTo = $request -> dateTo;
         $invoiceNumber = $request -> invoice_number;
@@ -31,11 +39,15 @@ class InvoiceReportController extends Controller
             } elseif ( $invoiceNumber ) {
                 $filter = invoices::where('invoice_number', $invoiceNumber) -> get();
                 return view('reports.report_invoices', compact('invoiceNumber')) -> withDetails($filter);
+            } elseif ($status) {
+                $filter = invoices::where('status', $status) -> get();
+                return view('reports.report_invoices', compact('status')) -> withDetails($filter);
             } else {
                 session() -> flash('error');
                 return redirect('report_invoices');
             }
 
     }
+
 
 }

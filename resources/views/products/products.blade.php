@@ -103,20 +103,24 @@
 
         <div class="col-xl-12">
             <div class="card">
+            @can('create product')
                 <div class="card-header">
                     <div class="d-flex">
                         <a  data-effect="effect-scale" data-toggle="modal" href="#form-add"
-                            class="modal-effect btn btn-sm btn-primary ml-2" style="color:white">
+                            class="modal-effect btn btn-sm btn-primary ml-2">
                             <i class="fas fa-plus ml-2"></i> اضافة منتج </a>
                     </div>
                 </div>
+            @endcan
                 <div class="card-body">
                     <div class="table-responsive col-12 m-auto">
                         <table class="table table-invoice table-light table-striped table-hover" id="example-1" data-page-length="50">
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0"> # </th>
+                                    @can('options')
                                     <th class="border-bottom-0"> العمليات </th>
+                                    @endcan
                                     <th class="border-bottom-0"> اسم المنتج </th>
                                     <th class="border-bottom-0"> القسم </th>
                                     <th class="border-bottom-0"> قام بالاضافة </th>
@@ -134,6 +138,7 @@
                                 @endphp
                                     <tr>
                                         <td> {{ $i }} </td>
+                                    @can('options')
                                         <td>
                                             <div class="dropdown">
                                                 <button aria-expanded="false" aria-haspopup="true"
@@ -141,24 +146,29 @@
                                                         type="button">العمليات</button>
                                                 <div class="dropdown-menu tx-14">
 
-                                                    <button class="dropdown-item" data-name="{{ $item->product_name }}"
-                                                            data-pro_id="{{ $item->id }}"
-                                                            data-section_name="{{ $item->section->section_name }}"
-                                                            data-description="{{ $item->description }}" data-toggle="modal"
+                                                @can('edit product')
+                                                    <button class="dropdown-item" data-name="{{ $item -> product_name }}"
+                                                            data-pro_id="{{ $item -> id }}"
+                                                            data-section_name="{{ $item -> section -> section_name }}"
+                                                            data-description="{{ $item -> description }}" data-toggle="modal"
                                                             data-target="#product_edit"><i class="typcn typcn-edit text-secondary ml-2"></i> تعديل </button>
+                                                @endcan
 
-                                                    <button class="dropdown-item" data-pro_id="{{ $item->id }}"
-                                                            data-product_name="{{ $item->product_name }}" data-toggle="modal"
+                                                @can('remove product')
+                                                    <button class="dropdown-item" data-pro_id="{{ $item -> id }}"
+                                                            data-product_name="{{ $item -> product_name }}" data-toggle="modal"
                                                             data-target="#product_del"><i class="far fa-file-alt text-danger ml-2"></i> حذف </button>
+                                                @endcan
 
                                                 </div>
                                             </div>
                                         </td>
-                                        <td> {{ $item->product_name }} </td>
-                                        <td> {{ $item->section->section_name }} </td>
-                                        <td> {{ $item->created_by }} </td>
-                                        <td> {{ $item->created_at }} </td>
-                                        <td> {{ $item->description }} </td>
+                                    @endcan
+                                        <td> {{ $item -> product_name }} </td>
+                                        <td> {{ $item -> section -> section_name }} </td>
+                                        <td> {{ $item -> created_by }} </td>
+                                        <td> {{ $item -> created_at }} </td>
+                                        <td> {{ $item -> description }} </td>
                                     </tr>
                                 @endforeach
                             </tbody>

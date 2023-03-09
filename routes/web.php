@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\invoices;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
@@ -10,6 +13,9 @@ use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CustomersReportController;
 use App\Http\Controllers\InvoiceReportController;
+use App\Http\Controllers\SearchInvoicesController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
 /*
@@ -69,10 +75,22 @@ Route::get('/part_of_paid_invoices', [InvoicesController::class, 'partOfPaidInvo
 
 Route::get('/report_invoices', [InvoiceReportController::class, 'index']);
 Route::post('/filter_invoices', [InvoiceReportController::class, 'reportInvoice']) -> name('filter_invoices');
+Route::get('/search', function () {
+//    $t_invoices = DB::table('invoices') -> get() -> toArray();
+    $t_invoices = invoices::all();
+    return view('reports.report_invoices', compact('t_invoices'));
+});
 
 Route::get('/report_customers', [customersReportController::class, 'index']);
 Route::post('/filter_customers', [customersReportController::class, 'reportCustomers']) -> name('filter_customers');
 
+Route::get('/search_invoices', [SearchInvoicesController::class, 'index']);
+Route::get('/action', [SearchInvoicesController::class, 'action']) -> name('action');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+});
+
+
 Route::get('/{page}', [AdminController::class, 'index']);
-
-

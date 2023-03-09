@@ -14,10 +14,10 @@
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="text-center mx-auto">
-{{--            <div>--}}
-{{--                <h2 class="tx-22 text-secondary">مرحبا <span class="text-primary mr-2">{{ Auth::user() -> name }}</span></h2>--}}
-{{--                <p class="mt-3"> لوحة تحكم نظام ادارة فواتير </p>--}}
-{{--            </div>--}}
+            {{--            <div>--}}
+            {{--                <h2 class="tx-22 text-secondary">مرحبا <span class="text-primary mr-2">{{ Auth::user() -> name }}</span></h2>--}}
+            {{--                <p class="mt-3"> لوحة تحكم نظام ادارة فواتير </p>--}}
+            {{--            </div>--}}
         </div>
     </div>
     <!-- /breadcrumb -->

@@ -119,8 +119,12 @@
                                         <!-- Tabs -->
                                         <ul class="nav panel-tabs main-nav-line">
                                             <li class="nav-item"><a href="#tab1" class="nav-link active" data-toggle="tab"> تفاصيل الفاتورة </a></li>
+                                            @can('حالة الدفع')
                                             <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab"> حالة الدفع </a></li>
+                                            @endcan
+                                            @can('المرفقات')
                                             <li class="nav-item"><a href="#tab3" class="nav-link" data-toggle="tab"> المرفقات </a></li>
+                                            @endcan
                                         </ul>
                                     </div>
                                 </div>
@@ -176,6 +180,7 @@
                                                 {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
 
                                         {{-- TAB 2 --}}
+                                    @can('حالة الدفع')
                                         <div class="tab-pane" id="tab2">
 
                                             {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
@@ -231,12 +236,15 @@
                                             {{-- END TABLE INVOICES STATUS --}}
                                             {{-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --}}
                                         </div>
+                                    @endcan
 
                                         {{-- TAB 3 --}}
+                                    @can('المرفقات')
                                         <div class="tab-pane" id="tab3">
                                             <div class="card-body">
 
                                                 <div class="card-body">
+                                                @can('اضافة مرفق')
                                                     <p class="text-danger"> * صيغة المرفق pdf, jpeg ,.jpg , png </p>
                                                     <h5 class="card-title"> اضافة مرفقات </h5>
                                                     <form method="post" action="{{ url('/InvoiceAttachments') }}"
@@ -255,6 +263,7 @@
                                                         <button type="submit" class="btn btn-primary m-auto d-block"
                                                                 name="uploadedFile"> تاكيد </button>
                                                     </form>
+                                                @endcan
                                                 </div>
                                                 <div class="table-responsive col-12 m-auto">
                                                     <table class="table table-invoice table-hover table-light table-striped">
@@ -286,6 +295,7 @@
                                                                        role="button">
                                                                         <span> عرض </span>
                                                                     </a>
+                                                                    @can('حذف المرفق')
                                                                     <button class="btn btn-danger btn-sm"
                                                                             data-toggle="modal"
                                                                             data-id_file="{{ $item -> id }}"
@@ -294,6 +304,7 @@
                                                                             data-target="#file_del">
                                                                         <span> حذف </span>
                                                                     </button>
+                                                                    @endcan
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -302,6 +313,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    @endcan
 
                                     </div>
                                 </div>
